@@ -1,0 +1,208 @@
+/* Base Styles */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font: 1.2em/1.4 Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 0 0 1em;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    border: 5px solid #000;
+}
+
+header ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0.5em 1em;
+    border-top: 1px solid #999;
+}
+
+header .title {
+    font-size: 150%;
+    font-style: italic;
+    font-weight: bold;
+    padding: 1em;
+}
+
+main {
+    padding: 0 1em;
+}
+
+.cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cards li {
+    border: 5px solid #000;
+    margin-bottom: 1em;
+}
+
+.cards h2 {
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+    padding: 0.5em 1em;
+}
+
+.cards .inner {
+    padding: 0.5em 1em;
+}
+
+.sidebar {
+    background-color: #333;
+    border: 5px solid #000;
+    padding: 0.5em 1em;
+    color: #fff;
+}
+
+/* Responsive Stuff Here! */
+
+
+/* I made sure to not repeat the code above and only add the changes to the @media in order to save space
+    I dont remember what the best practise would be, but I do think that by not repeating the code above
+    I made my code easier to read */
+
+/* I also wanted to add another universal element ( *{margin: 0; and padding: 0;} ). After I was revising my code
+    I noticed that I repeated the marging: 0; a lot of times. But I was not sure if I could place too many
+    universal elements like that in the middle of the code. */
+
+/* Some comments may seem out of place and that is because I worked on the desktop view first, after I was done
+    I simply copy and pasted the original code I had for the desktop view into the tablet view in order to not
+    repeat the very same code */
+
+/* All the header elements apply for both tablet and desktop view
+    starting at the main element very small changes begin to appear */
+
+/* the only difference between them is basically the number of columns and the elements positions inside the grid */
+
+
+/* TABLET VIEW */
+@media (min-width: 768px) {
+
+    html {
+        font-size: 120%;
+    }
+
+    /* Set header to a 2 column grid with even distribution and items on the center */
+    header {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+    }
+
+    header ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Make the header title span the first column */
+    header .title {
+        grid-column: 1 / span 1;
+        margin: 0;
+    }
+
+    /* Make the header navigation span the second column and align to the right */
+    header nav {
+        grid-column: 2 / span 1;
+        margin: 0;
+        padding: 1em;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    /* Make the header navigation list horizontal and space evenly */
+    header nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    header nav ul li {
+        display: inline-block;
+        margin: 0 0.5em;
+    }
+
+    header a {
+        border: none;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1em;
+        margin-top: 16px;
+    }
+
+    /* Move article to first column */
+    article {
+        order: 2;
+        grid-column: 1 / span 1;
+    }
+
+    /* Move aside to second column */
+    aside.sidebar {
+        order: 3;
+        grid-column: 2 / span 1;
+        position: sticky;
+        top: 0;
+    }
+
+    /* Reduce width of card, use auto-fit to fit as many cards as possible */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 1em;
+    }
+
+    /*DESKTOP VIEW*/
+    @media (min-width: 992px) {
+
+        /* Set the main content to a grid with columns that auto-fit their content */
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 1em;
+            margin-top: 16px;
+        }
+
+        article {
+            order: 2;
+            grid-column: 1 / span 2;
+        }
+
+        aside.sidebar {
+            order: 3;
+            grid-column: 3;
+            position: sticky;
+            top: 0;
+        }
+
+        /* Set the cards layout to a 3 column grid */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 1em;
+        }
+    }
+
+}
